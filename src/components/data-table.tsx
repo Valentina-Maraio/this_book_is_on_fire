@@ -116,6 +116,20 @@ export const schema = z.object({
   reviewer: z.string(),
 })
 
+// books schema
+export const bookSchema = z.object({
+  Author: z.string(),
+  Title: z.string(),
+  Type_of_ban: z.string(),
+  Secondary_author: z.string(),
+  Illustrator: z.string(),
+  Translator: z.string(),
+  State: z.string(),
+  District: z.string(),
+  Date_of_challenge_or_removal: z.string(),
+  Origin_of_challenge: z.string()
+})
+
 // Create a separate component for the drag handle
 function DragHandle({ id }: { id: number }) {
   const { attributes, listeners } = useSortable({
@@ -340,6 +354,7 @@ export function DataTable({
   data: initialData,
 }: {
   data: z.infer<typeof schema>[]
+  books: z.infer<typeof bookSchema>[]
 }) {
   const [data, setData] = React.useState(() => initialData)
   const [rowSelection, setRowSelection] = React.useState({})
