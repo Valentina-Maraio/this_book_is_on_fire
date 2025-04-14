@@ -48,7 +48,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-const countAllBannedBooks = (books, key) => {
+const countAllBannedBooks = (books: any, key: any) => {
   return books.reduce((acc: any, item: any) => {
     const value = item[key] || 'Unknown';
     acc[value] = (acc[value] ||  0) + 1;
@@ -68,7 +68,7 @@ export function ChartAreaInteractive() {
   })
   .map(([author, count]) => ({ author, count: typeof count === 'number' ? count : 0 }));
 
-  const mostBanned = sortedAuthors.filter((item) => item.count > 5);
+  const mostBanned = sortedAuthors.filter((item) => item.count > 2);
 
   return (
     <Card className="@container/card">
