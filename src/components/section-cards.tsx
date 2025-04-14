@@ -1,3 +1,5 @@
+'use client'
+import React, { useState } from 'react';
 import { IconTrendingDown, IconTrendingUp } from "@tabler/icons-react"
 
 import { Badge } from "@/components/ui/badge"
@@ -9,8 +11,19 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { Button } from "./ui/button";
+import { Dialog, DialogContent, DialogTrigger, DialogTitle, DialogDescription } from "@radix-ui/react-dialog";
+
+import banned from '../app/dashboard/banned_books.json';
+import { DialogFooter, DialogHeader } from "./ui/dialog";
 
 export function SectionCards() {
+  const lgbtBooks = banned.filter((book) => book.Title.toLowerCase().includes("lgbt"))
+  const lgbtCounter = lgbtBooks.length
+
+  const mostBannedAuthor = banned.filter((book) => book.Author.toLowerCase().includes('Kobabe'))
+  const kobabeBookCount = mostBannedAuthor.length
+
   return (
     <div className="*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 px-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs lg:px-6 @xl/main:grid-cols-2 @5xl/main:grid-cols-4">
       <Card className="@container/card">
@@ -59,9 +72,9 @@ export function SectionCards() {
       </Card>
       <Card className="@container/card">
         <CardHeader>
-          <CardDescription>Active Accounts</CardDescription>
+          <CardDescription>Total LGBTQI+ banned books</CardDescription>
           <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-            45,678
+            {lgbtCounter}
           </CardTitle>
           <CardAction>
             <Badge variant="outline">
@@ -79,9 +92,9 @@ export function SectionCards() {
       </Card>
       <Card className="@container/card">
         <CardHeader>
-          <CardDescription>Growth Rate</CardDescription>
+          <CardDescription>Most Banned Author</CardDescription>
           <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-            4.5%
+            {kobabeBookCount}
           </CardTitle>
           <CardAction>
             <Badge variant="outline">
@@ -91,10 +104,9 @@ export function SectionCards() {
           </CardAction>
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1.5 text-sm">
-          <div className="line-clamp-1 flex gap-2 font-medium">
-            Steady performance increase <IconTrendingUp className="size-4" />
+          <div className="line-clamp-1 flex gap-3 font-medium cursor-pointer">
+            Click here to see the banned books
           </div>
-          <div className="text-muted-foreground">Meets growth projections</div>
         </CardFooter>
       </Card>
     </div>
